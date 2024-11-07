@@ -17,7 +17,6 @@ public class Usuario {
     public boolean agregarPropiedad(Propiedad p) {
         if (!this.propiedades.contains(p)) {
             this.propiedades.add(p);
-            p.setDuenio(this);
             return true;
         } else {
             return false;
@@ -28,8 +27,10 @@ public class Usuario {
     // propietario, la cual es el 75% de la suma de precio totales de las reservas incluidas
     // en un período específico de tiempo.
     public double calcularIngresos(DateLapse tiempo) {
-        return propiedades.stream()
-            .mapToDouble(propiedad -> propiedad.getCantDiasReservados(tiempo) * propiedad.getPrecioPorNoche())
+        return this.propiedades.stream()
+            .flatMap(propiedad -> propiedad.getReservas())
+            .filter(reserva -> reserva.getTiempo().overlaps(tiempo))
+            .mapToDouble(precio -> precio.calcularPrecio())
             .sum() * 0.75;
-    }
+    }    
 }
