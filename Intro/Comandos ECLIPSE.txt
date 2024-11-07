@@ -1,0 +1,6 @@
+Atajos:
+
+Ctrl + D: Borrar la linea actual.
+Ctrl + /: Comentar la linea actual.
+Alt + flecha arriba / abajo: Mover la linea actual.
+Ctrl + Shift + F: Formatear el codigo.

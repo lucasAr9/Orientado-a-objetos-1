@@ -1,0 +1,7 @@
+Ejercicio 17
+	1. Hacer UML.
+	2. Revisar y preguntar. Sobre todo el tema de quien conoce a quien y quien hace que cosa.
+	3. Ver el tema de los distintos test, porque tendria que volver a agregar las propiedades a los
+	   usuarios si quiero hacerlo en otro @Test
+
+
