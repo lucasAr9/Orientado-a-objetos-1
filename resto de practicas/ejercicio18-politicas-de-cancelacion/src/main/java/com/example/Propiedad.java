@@ -4,33 +4,37 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+import com.example.PoliticaCancelacion.PoliticaCancelacion;
 
 public class Propiedad {
     private String direccion;
     private String descripcion;
     private double precioPorNoche;
     private List<Reserva> reservas;
+    private PoliticaCancelacion politicaCancelacion;
     
-    public Propiedad(String direccion, String descripcion, double precioPorNoche) {
+    public Propiedad(String direccion, String descripcion, double precioPorNoche, PoliticaCancelacion politicaCancelacion) {
         this.direccion = direccion;
         this.descripcion = descripcion;
         this.precioPorNoche = precioPorNoche;
         this.reservas = new ArrayList<>();
+        this.politicaCancelacion = politicaCancelacion;
     }
 
     public boolean disponibilidad(LocalDate desde, LocalDate hasta) {
         DateLapse t = new DateLapse(desde, hasta);
         return this.reservas.stream()
-            .map(reserva -> reserva.getTiempo())
-            .noneMatch(tiempo -> tiempo.overlaps(t));
+            .noneMatch(reserva -> reserva.getTiempo().overlaps(t));
+    }
+
+
+    public boolean disponibilidad(DateLapse t) {
+        return this.reservas.stream()
+            .noneMatch(reserva -> reserva.getTiempo().overlaps(t));
     }
 
     public boolean disponibilidad(Reserva r) {
-        // return this.reservas.stream()
-        //     .map(reserva -> reserva.getTiempo())
-        //     .noneMatch(tiempo -> tiempo.overlaps(r.getTiempo()));
-        return this.reservas.stream()
-            .noneMatch(reserva -> reserva.getTiempo().overlaps(r.getTiempo()));
+        return this.disponibilidad(r.getTiempo());
     }
 
     // Crear una reserva: Un usuario puede realizar una reserva para un período de
@@ -49,13 +53,13 @@ public class Propiedad {
     // Cancelar una reserva: Se debe permitir cancelar una reserva. En este caso, la
     // propiedad pasa a estar disponible durante el período de tiempo indicado en la
     // reserva.
-    public boolean cancelarReserva(Reserva r) {
-        if (this.reservas.contains(r)) {
+    public double cancelarReserva(Reserva r) {
+        DateLapse t = new DateLapse(LocalDate.now(), LocalDate.now());
+        if (this.reservas.contains(r) && !r.getTiempo().overlaps(t)) {
             this.reservas.remove(r);
-            return true;
-        } else {
-            return false;
+            return this.getPoliticaCancelacion().calcularReembolso(r);
         }
+        return 0;
     }
 
     public double getPrecioPorNoche() {
@@ -64,5 +68,9 @@ public class Propiedad {
 
     public Stream<Reserva> getReservas() {
         return this.reservas.stream();
+    }
+
+    public PoliticaCancelacion getPoliticaCancelacion() {
+        return politicaCancelacion;
     }
 }
