@@ -26,7 +26,7 @@ public class PorHora extends Contrato {
         return horasPorMes;
     }
 
-    public boolean contratoVigente() {
+    public boolean esVigente() {
         return this.getFechaFin().isAfter(LocalDate.now());
     }
 

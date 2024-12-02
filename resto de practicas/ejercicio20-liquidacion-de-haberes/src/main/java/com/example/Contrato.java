@@ -13,7 +13,7 @@ public abstract class Contrato {
         return fechaInicio;
     }
 
-    public abstract boolean contratoVigente();
+    public abstract boolean esVigente();
 
     public abstract double montoCobrar();
 }

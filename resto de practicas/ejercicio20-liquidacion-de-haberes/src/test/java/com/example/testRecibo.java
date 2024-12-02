@@ -44,12 +44,9 @@ public class testRecibo {
 
     @Test
     public void emitirRecibo() {
-        assertEquals(empleado1.generarRecibo().montoCobrar(), 1260000);
-
-        assertEquals(empleado2.generarRecibo().montoCobrar(), 0);
-
-        assertEquals(empleado3.generarRecibo().montoCobrar(), 200200);
-
-        assertEquals(empleado4.generarRecibo().montoCobrar(), 300400);
+        assertEquals(empleado1.emitirRecibo().getMontoCobrar(), 1260000);
+        assertEquals(empleado2.emitirRecibo().getMontoCobrar(), 0);
+        assertEquals(empleado3.emitirRecibo().getMontoCobrar(), 200200);
+        assertEquals(empleado4.emitirRecibo().getMontoCobrar(), 300400);
     }
 }

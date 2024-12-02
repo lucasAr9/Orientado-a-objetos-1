@@ -26,7 +26,7 @@ public class DePlanta extends Contrato {
         return montoPorHijos;
     }
 
-    public boolean contratoVigente() {
+    public boolean esVigente() {
         return true;
     }
 
