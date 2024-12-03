@@ -12,7 +12,7 @@ public class Usuario {
 
     public Usuario(String nombre) {
         this.nombre = nombre;
-        this.entradas = new BagImpl<>();
+        this.entradas = new ArrayList<>();
     }
 
     public Entrada comprarEntradas(Evento e, boolean seguroReembolso) {
