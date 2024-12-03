@@ -8,28 +8,17 @@ import com.example.Evento.Evento;
 
 public class Usuario {
     private String nombre;
-    private Bag<Entrada> entradas;
+    private List<Entrada> entradas;
 
     public Usuario(String nombre) {
         this.nombre = nombre;
         this.entradas = new BagImpl<>();
     }
 
-    public Entrada comprarEntradas(Evento e, int cant, boolean seguroReembolso) {
+    public Entrada comprarEntradas(Evento e, boolean seguroReembolso) {
         Entrada entrada = new Entrada(seguroReembolso, LocalDate.now(), e);
-        for (int i = 0; i < cant; i++) {
-            this.entradas.add(entrada);
-        }
+        this.entradas.add(entrada);
         return entrada;
-    }
-
-    public void cancelarCompra(Entrada e) {
-        this.entradas.removeAll(e);
-    }
-
-    public double consultarPrecioAsistencia(Evento e, LocalDate fecha) {
-        Entrada entrada = new Entrada(false, fecha, e);
-        return entrada.costoDeEntrada();
     }
 
     public double calcularMontoRecuperar(Entrada e) {

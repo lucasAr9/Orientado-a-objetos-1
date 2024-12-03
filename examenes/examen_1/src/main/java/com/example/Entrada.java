@@ -16,16 +16,10 @@ public class Entrada {
     }
 
     public double costoDeEntrada() {
-        double costoBase = 0;
         if (this.isSeguroReembolso()) {
-            costoBase = e.costoDelEvento() + 500;
+            return e.consultarPrecioAsistencia(LocalDate.now()) + 500;
         } else {
-            costoBase = e.costoDelEvento();
-        }
-        if (this.getFechaCompra().isEqual(LocalDate.now())) {
-            return costoBase * 1.20;
-        } else {
-            return costoBase;
+            return e.consultarPrecioAsistencia(LocalDate.now());
         }
     }
 
