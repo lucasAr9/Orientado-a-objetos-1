@@ -19,6 +19,14 @@ public abstract class Evento {
 
     public abstract double costoDelEvento();
 
+    public double consultarPrecioAsistencia(LocalDate fecha) {
+        if (fecha.isEqual(LocalDate.now())) {
+            return this.costoDelEvento() * 1.20;
+        } else {
+            return this.costoDelEvento();
+        }
+    }
+
     public String getNombre() {
         return nombre;
     }
