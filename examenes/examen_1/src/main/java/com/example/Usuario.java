@@ -8,11 +8,11 @@ import com.example.Evento.Evento;
 
 public class Usuario {
     private String nombre;
-    private List<Entrada> entradas;
+    private Bag<Entrada> entradas;
 
     public Usuario(String nombre) {
         this.nombre = nombre;
-        this.entradas = new ArrayList<>();
+        this.entradas = new BagImpl<>();
     }
 
     public Entrada comprarEntradas(Evento e, boolean seguroReembolso) {
@@ -21,18 +21,6 @@ public class Usuario {
         return entrada;
     }
 
-<<<<<<< HEAD
-    public void cancelarCompra(Entrada e) {
-        this.entradas.removeAll(e);
-    }
-
-    public double consultarPrecioAsistencia(Evento e, LocalDate fecha) { // esto va en el evento
-        Entrada entrada = new Entrada(false, fecha, e);
-        return entrada.costoDeEntrada();
-    }
-
-=======
->>>>>>> e02f5ad00fd977c5543fa4dcbd3d65ce9d59b919
     public double calcularMontoRecuperar(Entrada e) {
         DataLapse tiempo = new DataLapse(e.getFechaCompra(), e.getEvento().getFecha());
         long t = tiempo.sizeInDays();
