@@ -27,7 +27,7 @@ public class Usuario {
         this.entradas.removeAll(e);
     }
 
-    public double consultarPrecioAsistencia(Evento e, LocalDate fecha) {
+    public double consultarPrecioAsistencia(Evento e, LocalDate fecha) { // esto va en el evento
         Entrada entrada = new Entrada(false, fecha, e);
         return entrada.costoDeEntrada();
     }
